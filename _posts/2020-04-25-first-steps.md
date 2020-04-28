@@ -12,7 +12,8 @@ A simple piece of jquery will detect a click from our button element and we can 
 ```$('.startBtn').click(function() {
 $('.thisBtn,.thisScreen').hide();
 $('.nextBtn,.nextScreen').show(); 
-});```
+});
+```
 
 In the skeleton I added the welcome, teams, rounds, final, winner and loser screens for each stage of the game. The rounds screen is the only screen which will require more buttons as this is where the game action will take place. For this screen I will need a button to make the draw for the round, play the matches and finally to move to the next round. So I can now set up the buttons required to move between them.
 
@@ -22,6 +23,7 @@ In the skeleton I added the welcome, teams, rounds, final, winner and loser scre
 <button class="roundBtn" style="display: none;">Play <span class="roundName"></span>...</button>
 <button class="nextBtn" style="display: none;">Next round...</button>
 <button class="finalBtn" style="display: none;">Play Final...</button>
-<button class="endBtn" style="display: none;">End game...</button>```
+<button class="endBtn" style="display: none;">End game...</button>
+```
 
-With these in place the script can be added to test the flow through the game...
+With these in place the script can be added to [test the flow through the game...](/dev/stage2.html)
