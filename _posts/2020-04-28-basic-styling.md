@@ -86,7 +86,7 @@ Because the blue highlight box is likely to be reused elsewhere and will require
 }
 ```
 
-As we want the footer to remain fixed to the bottom of the screen we can use `position: fixed;` on the footer set to 100% of the width of its container...
+As we want the footer to remain fixed to the bottom of the screen we can use `position: fixed;` on the footer set to 100% of the width, `bottom: 0;` to keep it at the bottom of the screen and add the wrapper to restrict it to the same width as the remaining content ...
 
 ```
 footer {

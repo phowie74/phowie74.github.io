@@ -28,6 +28,15 @@ header {
   min-width: 60%;
 }
 
+main { padding: 10px; }
+
+footer {
+	position: fixed;
+	width: 100%;
+	bottom: 0;
+	padding: 10px;
+}
+
 .box-blue {
   background-color: blue;
   padding: 10px;
@@ -61,12 +70,6 @@ button:focus {
     outline-offset: -4px;
 }
 
-footer {
-	position: fixed;
-	width: 100%;
-	bottom: 0;
-	padding: 10px;
-}
 </style>
 </head>
 <body>
@@ -78,7 +81,7 @@ footer {
 <main>
 <div class="screen welcome" style="">
 <h1>Welcome to Hampden</h1>
-<p>Hampden is a simple dice based football game. Each round you play your dice gainst your opponent thorugh 90 minutes, extra time, penalties and even sudden death is required. Your dice is picked based on the venue and division of the respective teams.</p>
+<p>Hampden is a simple dice based football game. Each round you play your dice against your opponent through 90 minutes, extra time, penalties and even sudden death is required. Your dice is picked based on the venue and division of the respective teams.</p>
 <p>Lead your chosen team to the glory of the Scottish Cup at Hampden...</p>
 </div>
 <div class="screen teams" style="display: none;">
@@ -102,7 +105,7 @@ footer {
 	<p><span class="myTeam"></span> have beaten <span class="finalist"></span> to lift the Scottish Cup.</p>
 </div>
 <div class="screen loser" style="display: none;">
-<h2>Unlucky! <span class="roundName"></span> have been knocked out of the Scottich Cup</h2>
+<h2>Unlucky! <span class="roundName"></span> have been knocked out of the Scottish Cup</h2>
 	<p><span class="finalist"></span> have beaten <span class="myTeam"></span> to lift the Scottish Cup.</p>
 	<p>Better luck next time!</p>
 </div>
