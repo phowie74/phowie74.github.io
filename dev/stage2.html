@@ -57,28 +57,28 @@
 $('.startBtn').click(function() {
 	$(this).hide();
 	$('.welcome').hide();
-	$('.hampdenBtn,.teams').show();
+	$('.playBtn,.teams').show();
 });
-$('.hampdenBtn').click(function() {
+$('.playBtn').click(function() {
 	$(this).hide();
-	$('.hampdenBtn').fadeOut();
+	$('.teams').fadeOut();
 	$('.drawBtn,.round').fadeIn();
 });
 $('.drawBtn').click(function() {
 	$(this).hide();
-	$('.playBtn').fadeIn();
-});
-$('.playBtn').click(function() {
-	$(this).hide();
-	$('.roundBtn,.endBtn').fadeIn();
+	$('.roundBtn').fadeIn();
 });
 $('.roundBtn').click(function() {
+	$(this).hide();
+	$('.nextBtn,.endBtn').fadeIn();
+});
+$('.nextBtn').click(function() {
 	$(this).hide();
 	$('.drawBtn').fadeIn();
 });
 $('.finalBtn').click(function() {
 	$(this).hide();
-	$('.finalBtn,.endBtn').fadeIn();	
+	$('.endBtn').fadeIn();	
 });
 $('.endBtn').click(function() {
 	$(this).hide();
