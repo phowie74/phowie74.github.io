@@ -10,31 +10,31 @@
 <main>
 <div class="screen welcome" style="">
 <h1>Welcome to Hampden</h1>
-<p>Hampden is a simple dice based football game. Each round you play your dice gainst your opponent thorugh 90 minutes, extra time, penalties and even sudden death is required. Your dice is picked based on the venue and division of the respective teams.</p>
+<p>Hampden is a simple dice based football game. Each round you play your dice against your opponent through 90 minutes, extra time, penalties and even sudden death is required. Your dice is picked based on the venue and division of the respective teams.</p>
 <p>Lead your chosen team to the glory of the Scottish Cup at Hampden...</p>
 </div>
-<div class="screen teams">
+<div class="screen teams" style="display: none;">
 <h2>Pick your team...</h2>
 <p>Choose your favourite team and click to Play Hampden...</p>
 <div class="teamList"></div>
 <p class="selectedTeam"></p>
 </div>
-<div class="screen round">
+<div class="screen round" style="display: none;">
 <h2>Play <span class="roundName"></span></h2>
 <p><span class="myTeam"></span> are one of <span class="teamCount"></span> teams in the hat for this <span class="roundName"></span> draw.</p>
 <div class="gameContent"></div>
 </div>
-<div class="screen final">
+<div class="screen final" style="display: none;">
 <h2>Congratulations! <span class="roundName"></span> have made the Final of this years' Scottish Cup</h2>
 	<p><span class="myTeam"></span> are set to play <span class="finalist"></span> in what is sure to be a gripping final.</p>
 	<div class="finalContent"></div>
 </div>
-<div class="screen winner">
+<div class="screen winner" style="display: none;">
 <h2>Congratulations! <span class="myTeam"></span> are Scottish Cup Champions</h2>
 	<p><span class="myTeam"></span> have beaten <span class="finalist"></span> to lift the Scottish Cup.</p>
 </div>
-<div class="screen loser">
-<h2>Unlucky! <span class="roundName"></span> have been knocked out of the Scottich Cup</h2>
+<div class="screen loser" style="display: none;">
+<h2>Unlucky! <span class="roundName"></span> have been knocked out of the Scottish Cup</h2>
 	<p><span class="finalist"></span> have beaten <span class="myTeam"></span> to lift the Scottish Cup.</p>
 	<p>Better luck next time!</p>
 </div>
@@ -43,7 +43,47 @@
 <footer>
 	<div class="wrapper"><p>
 <button class="startBtn" style="">Get started...</button>
+<button class="playBtn" style="display: none;">Play Hampden...</button>
+<button class="drawBtn" style="display: none;">Make draw...</button>
+<button class="roundBtn" style="display: none;">Play <span class="roundName"></span>...</button>
+<button class="nextBtn" style="display: none;">Next round...</button>
+<button class="finalBtn" style="display: none;">Play Final...</button>
+<button class="endBtn" style="display: none;">End game...</button>
 	</p></div>
 </footer>
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
+<script>
+$('.startBtn').click(function() {
+	$(this).hide();
+	$('.welcome').hide();
+	$('.playBtn,.teams').show();
+});
+$('.playBtn').click(function() {
+	$(this).hide();
+	$('.teams').fadeOut();
+	$('.drawBtn,.round').fadeIn();
+});
+$('.drawBtn').click(function() {
+	$(this).hide();
+	$('.roundBtn').fadeIn();
+});
+$('.roundBtn').click(function() {
+	$(this).hide();
+	$('.nextBtn,.endBtn').fadeIn();
+});
+$('.nextBtn').click(function() {
+	$(this).hide();
+	$('.drawBtn').fadeIn();
+});
+$('.finalBtn').click(function() {
+	$(this).hide();
+	$('.endBtn').fadeIn();
+});
+$('.endBtn').click(function() {
+	$(this).hide();
+	$('.welcome,.round,.final').fadeOut();
+	$('.welcome,.startBtn').fadeIn();
+});
+</script>
 </html>
