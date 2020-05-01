@@ -100,6 +100,11 @@ button.teamBtn:focus {
     background: yellow;
 }
 
+table { width: 100%; }
+th { text-align: left; color: limegreen; }
+.text-right { text-align: right; }
+.text-center { text-align: center; }
+
 </style>
 </head>
 <body>
@@ -124,7 +129,7 @@ button.teamBtn:focus {
 </div>
 <div class="screen round" style="display: none;">
 <h2><span class="roundName"></span></h2>
-<p><span class="myTeam"></span> are one of <span class="teamCount"></span> teams in the hat for this <span class="roundName"></span> draw.</p>
+<p><span class="myTeam"></span> are one of <span class="totalTeams"></span> teams in the hat for this <span class="roundName"></span> draw.</p>
 <div class="gameContent"></div>
 </div>
 <div class="screen final" style="display: none;">
@@ -165,6 +170,7 @@ var currentRound;
 var roundName;
 var myTeamID;
 var myTeam;
+var matches;
 
 $(function() {
   initialiseTeams();
@@ -270,15 +276,50 @@ function roundNamer() { // name current round and update game screens
 	$('.roundName').text(roundName);
 	$('.totalTeams').text(totalTeams);
 }
+
+
 function makeDraw() {
-  $('.gameContent').html('<p>Draw Made!</p>');
+	var table = '<table><thead><tr><th width="30%" class="text-right">Home</th><th width="5%"></th><th width="5%"></th><th width="5%"></th><th width="20%">Away</th><th width="25%"></th></tr></thead><tbody>';
+	matches = totalTeams / 2;
+	var list = [];
+	for (var i = 0; i < totalTeams; i++) { list.push(i); }
+	list.sort(function() { return 0.5 - Math.random() }); // shuffle array
+  //console.log(list);
+	var matchNo = 1;
+	for(var i=0; i<list.length; i++){
+    if(i % 2 == 0){
+		table += '<tr class="match' + matchNo + '"><td class="text-right home" id="' + list[i] + '">' + teams[list[i]].name + '</td><td class="text-center homeScore team' + list[i] + '"></td><td class="text-center">vs.</td>';
+      //console.log(matchNo);
+      matchNo++;
+    } else {
+		 table += '<td class="text-center awayScore team' + list[i] + '"></td><td class="away" id="' + list[i] + '">' + teams[list[i]].name + '</td><td class="ft"></td></tr>';
+
+    }
+  }
+	table += '</tbody></table>';
+	$('.gameContent').html(table);
+
 }
+function finalDraw() {
+  var table = '<table><thead><tr><th width="30%" class="text-right">Home</th><th width="5%"></th><th width="5%"></th><th width="5%"></th><th width="20%">Away</th><th width="25%"></th></tr></thead><tbody>';
+  for(var i=0; i<2; i++){
+    if(i % 2 == 0){
+      table += '<tr class="match1"><td class="text-right home" id="0">' + teams[0].name + '</td><td class="text-center homeScore team0"></td><td class="text-center">vs.</td>';
+    } else {
+      table += '<td class="text-center awayScore team1"></td><td class="away" id="1">' + teams[1].name + '</td><td class="ft"></td></tr>';
+    }
+  }
+  table += '</tbody></table>';
+  $('.finalContent').html(table);
+}
+
 function playRound() { // simple function to move game on for testing
   currentRound++;
   totalTeams = totalTeams / 2;
   $('.gameContent').html('<p>Round Played!</p>');
 }
 function nextRound() { // update round screen or move to final!
+  $('.gameContent').html("");
   if (totalTeams == 2) {
     $('.nextBtn,.endBtn,.round').hide();
     $('.finalBtn,.final').fadeIn();
@@ -323,7 +364,7 @@ $('.nextBtn').click(function() {
 });
 $('.finalBtn').click(function() {
 	$('.finalBtn,.final').hide();
-
+	finalDraw();
 	$('.winner,.endBtn').fadeIn();
 });
 $('.endBtn').click(function() {
