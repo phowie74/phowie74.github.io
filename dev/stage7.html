@@ -301,12 +301,12 @@ function makeDraw() {
 
 }
 function finalDraw() {
-  var table = '<table><thead><tr><th width="30%" class="text-right">Home</th><th width="5%"></th><th width="5%"></th><th width="5%"></th><th width="20%">Away</th><th width="25%"></th></tr></thead><tbody>';
+  var table = '<table><tbody>';
   for(var i=0; i<2; i++){
     if(i % 2 == 0){
-      table += '<tr class="match1"><td class="text-right home" id="0">' + teams[0].name + '</td><td class="text-center homeScore team0"></td><td class="text-center">vs.</td>';
+      table += '<tr class="match1"><td width="30%" class="text-right home" id="0">' + teams[0].name + '</td><td width="5%" class="text-center homeScore team0"></td><td width="5%" class="text-center">vs.</td>';
     } else {
-      table += '<td class="text-center awayScore team1"></td><td class="away" id="1">' + teams[1].name + '</td><td class="ft"></td></tr>';
+      table += '<td width="5%" class="text-center awayScore team1"></td><td width="20%" class="away" id="1">' + teams[1].name + '</td><td width="25%" class="ft"></td></tr>';
     }
   }
   table += '</tbody></table>';
@@ -322,6 +322,7 @@ function nextRound() { // update round screen or move to final!
   $('.gameContent').html("");
   if (totalTeams == 2) {
     $('.nextBtn,.endBtn,.round').hide();
+    finalDraw();
     $('.finalBtn,.final').fadeIn();
   } else {
     roundNamer();
