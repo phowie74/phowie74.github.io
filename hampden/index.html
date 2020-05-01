@@ -81,6 +81,24 @@ button:focus {
     outline: 1px solid #fff;
     outline-offset: -4px;
 }
+button:disabled {
+  background: #cccccc;
+  color: #999999;
+  cursor: default;
+}
+
+.teamList { line-height: 4; }
+button.teamBtn {
+	background: white;
+	color: #000;
+}
+button.teamBtn.selected {
+	background: limegreen;
+}
+button.teamBtn:hover,
+button.teamBtn:focus {
+    background: yellow;
+}
 
 </style>
 </head>
@@ -101,8 +119,8 @@ button:focus {
 <div class="screen teams" style="display: none;">
 <h2>Pick your team...</h2>
 <p>This seasons Scottish Cup has <span class="totalTeams"></span> teams and will be played over <span class="totalRounds"></span> rounds.</p><p>Choose your favourite team and click to Play Hampden...</p>
-<div class="teamList">Teams listed here</div>
-<p class="selectedTeam">Chosen team here</p>
+<p class="teamList"></p>
+<p class="selectedTeam"></p>
 </div>
 <div class="screen round" style="display: none;">
 <h2><span class="roundName"></span></h2>
@@ -129,7 +147,7 @@ button:focus {
 <footer>
 	<div class="wrapper"><div class="box-blue">
 <button class="startBtn" style="">Get started...</button>
-<button class="playBtn" style="display: none;">Play Hampden...</button>
+<button class="playBtn" style="display: none;" disabled>Play Hampden...</button>
 <button class="drawBtn" style="display: none;">Make draw...</button>
 <button class="roundBtn" style="display: none;">Play <span class="roundName"></span>...</button>
 <button class="nextBtn" style="display: none;">Next round...</button>
@@ -145,8 +163,8 @@ var totalTeams;
 var totalRounds;
 var currentRound;
 var roundName;
-
-var myTeam = "Celtic";
+var myTeamID;
+var myTeam;
 
 $(function() {
   initialiseTeams();
@@ -157,30 +175,54 @@ $(function() {
 
 function initialiseTeams() {
 	teams = [
-  {
-    id: 0,
-    name: "Aberdeen",
-    division: "Pr",
-    player: 0
-  },
-  {
-    id: 1,
-    name: "Celtic",
-    division: "Pr",
-    player: 0
-  },
-  {
-    id: 2,
-    name: "Hibs",
-    division: "Pr",
-    player: 0
-  },
-  {
-    id: 3,
-    name: "Sevco",
-    division: "Pr",
-    player: 0
-  }
+	{
+		id: 0,
+		name: "Aberdeen",
+		division: "Pr",
+		player: 0
+	},
+	{
+		id: 1,
+		name: "Celtic",
+		division: "Pr",
+		player: 0
+	},
+	{
+		id: 2,
+		name: "Hibs",
+		division: "Pr",
+		player: 0
+	},
+	{
+		id: 3,
+		name: "Secvo",
+		division: "Pr",
+		player: 0
+	},
+	{
+		id: 4,
+		name: "Inverness",
+		division: "Ch",
+		player: 0
+	},
+	{
+		id: 5,
+		name: "Dundee Utd",
+		division: "Ch",
+		player: 0
+	},
+	{
+		id: 6,
+		name: "Raith Rovers",
+		division: "D1",
+		player: 0
+	},
+	{
+		id: 7,
+		name: "Dumbarton",
+		division: "D1",
+		player: 0
+	}
   ];
   currentRound = 1;
   totalRounds = 1;
@@ -193,7 +235,27 @@ function initialiseTeams() {
 	} while (i > 2);
 	$('.totalRounds').text(totalRounds);
 
+  listTeams();
 };
+
+function listTeams() {
+	teams.forEach(function(team) {
+		var team;
+		$('.teamList').append('<button class="teamBtn button" name="' + team.name + '" value="' + team.id + '">' + team.name + ' <small>(' + team.division + ')</small></button> ');
+	});
+	pickTeam();
+}
+
+function pickTeam() {
+  $('.teamBtn').click(function() {
+    myTeamID = $(this).val();
+    myTeam = teams[myTeamID].name;
+    $('.teamBtn').removeClass('selected');
+    $(this).addClass('selected');
+  	$('.selectedTeam').html('You have selected <span class="myTeam">' + myTeam + '</span>');
+    $('.playBtn').removeAttr("disabled");
+  });
+}
 
 function roundNamer() { // name current round and update game screens
 	if (totalRounds - currentRound == 0) {
@@ -238,9 +300,12 @@ $('.startBtn').click(function() {
 	$('.startBtn,.welcome').hide();
 	$('.playBtn,.teams').fadeIn();
 });
+
 $('.playBtn').click(function() {
 	$('.playBtn,.teams').hide();
 	$('.drawBtn,.round').fadeIn();
+	$('.myTeam').text(myTeam);
+	teams[myTeamID].player = 1;
 });
 $('.drawBtn').click(function() {
 	$(this).hide();
