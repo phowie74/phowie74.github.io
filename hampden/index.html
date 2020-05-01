@@ -39,11 +39,13 @@ header svg { vertical-align: middle; }
 }
 
 main { padding: 10px; }
+main span { color: yellow; }
 
 footer {
 	position: fixed;
 	width: 100%;
 	bottom: 0;
+	left: 0;
 	padding: 10px;
 }
 
@@ -93,23 +95,24 @@ button:focus {
 <main>
 <div class="screen welcome" style="">
 <h1>Welcome to Hampden</h1>
-<p>Hampden is a simple dice based football game. Each round you play your dice against your opponent through 90 minutes, extra time, penalties and even sudden death is required. Your dice is picked based on the venue and division of the respective teams.</p>
+<p>Hampden is a simple dice based football game.</p><p>Each round you play your dice against your opponent through 90 minutes, extra time, penalties and even sudden death is required.</p><p>Your dice is picked based on the venue and division of the respective teams.</p>
 <p>Lead your chosen team to the glory of the Scottish Cup at Hampden...</p>
 </div>
 <div class="screen teams" style="display: none;">
 <h2>Pick your team...</h2>
-<p>Choose your favourite team and click to Play Hampden...</p>
-<div class="teamList"></div>
-<p class="selectedTeam"></p>
+<p>This seasons Scottish Cup has <span class="totalTeams"></span> teams and will be played over <span class="totalRounds"></span> rounds.</p><p>Choose your favourite team and click to Play Hampden...</p>
+<div class="teamList">Teams listed here</div>
+<p class="selectedTeam">Chosen team here</p>
 </div>
 <div class="screen round" style="display: none;">
-<h2>Play <span class="roundName"></span></h2>
+<h2><span class="roundName"></span></h2>
 <p><span class="myTeam"></span> are one of <span class="teamCount"></span> teams in the hat for this <span class="roundName"></span> draw.</p>
 <div class="gameContent"></div>
 </div>
 <div class="screen final" style="display: none;">
-<h2>Congratulations! <span class="roundName"></span> have made the Final of this years' Scottish Cup</h2>
-	<p><span class="myTeam"></span> are set to play <span class="finalist"></span> in what is sure to be a gripping final.</p>
+<h2>Congratulations!<h2>
+  <p><span class="myTeam"></span> have made the Final of this years' Scottish Cup</h2>
+	<p><span class="finalist"></span> are set to play <span class="myTeam"></span> in what is sure to be a gripping final.</p>
 	<div class="finalContent"></div>
 </div>
 <div class="screen winner" style="display: none;">
@@ -137,35 +140,130 @@ button:focus {
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
 <script>
+var teams;
+var totalTeams;
+var totalRounds;
+var currentRound;
+var roundName;
+
+var myTeam = "Celtic";
+
+$(function() {
+  initialiseTeams();
+  roundNamer();
+
+  $('.myTeam').text(myTeam);
+});
+
+function initialiseTeams() {
+	teams = [
+  {
+    id: 0,
+    name: "Aberdeen",
+    division: "Pr",
+    player: 0
+  },
+  {
+    id: 1,
+    name: "Celtic",
+    division: "Pr",
+    player: 0
+  },
+  {
+    id: 2,
+    name: "Hibs",
+    division: "Pr",
+    player: 0
+  },
+  {
+    id: 3,
+    name: "Sevco",
+    division: "Pr",
+    player: 0
+  }
+  ];
+  currentRound = 1;
+  totalRounds = 1;
+	totalTeams = teams.length;
+	$('.totalTeams').text(totalTeams);
+	var i = teams.length;
+	do {
+  	totalRounds++;
+		i = i / 2;
+	} while (i > 2);
+	$('.totalRounds').text(totalRounds);
+
+};
+
+function roundNamer() { // name current round and update game screens
+	if (totalRounds - currentRound == 0) {
+		roundName = 'Final';
+	} else if (totalRounds - currentRound == 1) {
+		roundName = 'Semi-Final';
+	} else if (totalRounds - currentRound == 2) {
+		roundName = 'Quarter-Final';
+	} else {
+		roundName = 'Round ' + currentRound;
+	}
+	$('.roundName').text(roundName);
+	$('.totalTeams').text(totalTeams);
+}
+function makeDraw() {
+  $('.gameContent').html('<p>Draw Made!</p>');
+}
+function playRound() { // simple function to move game on for testing
+  currentRound++;
+  totalTeams = totalTeams / 2;
+  $('.gameContent').html('<p>Round Played!</p>');
+}
+function nextRound() { // update round screen or move to final!
+  if (totalTeams == 2) {
+    $('.nextBtn,.endBtn,.round').hide();
+    $('.finalBtn,.final').fadeIn();
+  } else {
+    roundNamer();
+    $('.drawBtn').fadeIn();
+  }
+}
+function restartGame() { // go back to the beginning again!
+  initialiseTeams();
+  roundNamer();
+}
+
+
+
+
+
 $('.startBtn').click(function() {
-	$(this).hide();
-	$('.welcome').hide();
-	$('.playBtn,.teams').show();
+	$('.startBtn,.welcome').hide();
+	$('.playBtn,.teams').fadeIn();
 });
 $('.playBtn').click(function() {
-	$(this).hide();
-	$('.teams').fadeOut();
+	$('.playBtn,.teams').hide();
 	$('.drawBtn,.round').fadeIn();
 });
 $('.drawBtn').click(function() {
 	$(this).hide();
+	makeDraw();
 	$('.roundBtn').fadeIn();
 });
 $('.roundBtn').click(function() {
 	$(this).hide();
+	playRound();
 	$('.nextBtn,.endBtn').fadeIn();
 });
 $('.nextBtn').click(function() {
 	$(this).hide();
-	$('.drawBtn').fadeIn();
+	nextRound();
 });
 $('.finalBtn').click(function() {
-	$(this).hide();
-	$('.endBtn').fadeIn();
+	$('.finalBtn,.final').hide();
+
+	$('.winner,.endBtn').fadeIn();
 });
 $('.endBtn').click(function() {
 	$(this).hide();
-	$('.welcome,.round,.final').fadeOut();
+	$('.welcome,.round,.final,.winner,.loser').hide();
 	$('.welcome,.startBtn').fadeIn();
 });
 </script>
