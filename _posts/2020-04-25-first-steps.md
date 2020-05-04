@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "First steps adding interactivity"
+categories: [Hampden, jquery]
 ---
 
 # First steps with scripting

@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "Header styling fun"
+categories: [Hampden, css, svg]
 ---
 
 # Header styling fun

@@ -1,4 +1,28 @@
 
 
 title: phowie74
-description: Testing github pages and blogging as I learn to use github.
+description: Testing github pages and jekyll blogging as I learn to use github.
+
+remote_theme: mmistakes/so-simple-theme@3.2.0
+skin: /assets/css/skins/dark.css
+
+
+author:
+  links:
+    - title: Twitter
+      url: https://twitter.com/phowie74
+      icon: fab fa-twitter-square
+    - title: GitHub
+      url: https://github.com/phowie74
+      icon: fab fa-github-square
+
+footer_links:
+  - title: Twitter
+    url: https://twitter.com/phowie74
+    icon: fab fa-twitter-square
+  - title: GitHub
+    url: https://github.com/phowie74
+    icon: fab fa-github-square
+  - title: Feed
+    url: atom.xml
+    icon: fas fa-rss-square

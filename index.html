@@ -1,7 +1,10 @@
 ---
 # front matter tells Jekyll to process Liquid
-layout: default
-title: Home
+layout: home
+paginate: true  # enables pagination loop, see section above for additional setup
+entries_layout: grid
+posts_limit: 5
+
 ---
-<h1>{{ "Hello World!" | downcase }}</h1>
+
 

@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "Simplified match results"
+categories: [Hampden, jquery]
 ---
 
 # Simplified match results
