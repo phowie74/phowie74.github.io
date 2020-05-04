@@ -3,6 +3,4 @@
 title: phowie74
 description: Testing github pages and blogging as I learn to use github.
 
-remote_theme: "mmistakes/so-simple-theme@3.2.0"
-
 theme: jekyll-theme-minimal
