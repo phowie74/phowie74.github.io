@@ -1,4 +1,6 @@
-- name: Home
-  link: /
-- name: About
-  link: /about.html
+- title: Blog
+  url: /blog/
+- title: Categories
+  url: /categories/
+- title: Search
+  url: /search/
