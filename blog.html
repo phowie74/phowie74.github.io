@@ -1,16 +1,9 @@
 ---
 # front matter tells Jekyll to process Liquid
-layout: default
+layout: posts
+paginate: true  # enables pagination loop, see section above for additional setup
+entries_layout: grid
+posts_limit: 5
 title: Blog
+permalink: /blog/
 ---
-<h1>Latest Posts</h1>
-
-<ul>
-  {% for post in site.posts %}
-    <li>
-      <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
-      {{ post.excerpt }}
-    </li>
-  {% endfor %}
-</ul>
-
