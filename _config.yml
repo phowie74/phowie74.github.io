@@ -15,3 +15,14 @@ author:
     - title: GitHub
       url: https://github.com/phowie74
       icon: fab fa-github-square
+
+footer_links:
+  - title: Twitter
+    url: https://twitter.com/phowie74
+    icon: fab fa-twitter-square
+  - title: GitHub
+    url: https://github.com/phowie74
+    icon: fab fa-github-square
+  - title: Feed
+    url: atom.xml
+    icon: fas fa-rss-square
