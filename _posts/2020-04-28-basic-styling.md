@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "Some basic styling"
+categories: [Hampden, html, css]
 ---
 
 # Some basic styling
