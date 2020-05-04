@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "Team Selection"
+categories: [Hampden, jquery, css]
 ---
 
 # Team Selection
