@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "Initialise Game Structure"
+categories: [Hampden, jquery]
 ---
 
 # Initialise Game Structure
