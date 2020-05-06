@@ -1,0 +1,442 @@
+<html>
+<head>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+<style>
+
+* { box-sizing: border-box; }
+body {
+  background: #222;
+	color: #fff;
+  font-size: 100%;
+	font-size: 1rem;
+	line-height: 1.4;
+}
+
+.wrapper {
+	margin: 0 auto;
+	max-width: 1000px;
+	width: 90%;
+	font-size: 1rem
+}
+p, td { font-family: 'VT323', Verdana, monospace; font-size: 1.5rem; }
+h1, h2, h3, strong { font-family: 'Press Start 2P', Lucida Console, monaco, cursive; }
+h1, h2, h3 { color: limegreen; font-size: 1.2rem; }
+strong { font-size: 1rem; color: limegreen; }
+
+
+header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 10px;
+}
+header svg { vertical-align: middle; }
+.left{
+  flex-basis: 20rem;
+  flex-grow: 1;
+}
+.right {
+  flex-basis: 0;
+  flex-grow: 999;
+  min-width: 60%;
+}
+.ceefax {
+	color: limegreen;
+	font-family: 'Press Start 2P', Lucida Console, monaco, cursive;
+	font-size: 5vw;
+	line-height: 1;
+	text-shadow: 0px .7vw 0px rgba(0,0,0,1);
+}
+.box-blue {
+  background-color: blue;
+  padding: 10px;
+  text-align: center;
+}
+
+td.homeScore, td.awayScore { color: limegreen; }
+span { color: yellow; }
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.text-left { text-align: left; }
+
+button {
+    display: inline-block;
+    border: none;
+		font-family: 'VT323', Verdana, monospace;
+		font-size: 1.5rem;
+    padding: .5rem 1rem;
+    margin: .5rem;
+    text-decoration: none;
+    background: limegreen;
+    color: #222;
+    cursor: pointer;
+}
+button:hover,
+button:focus {
+    background: yellow;
+}
+
+button:focus {
+    outline: 1px solid #fff;
+    outline-offset: -4px;
+}
+button:disabled {
+  background: #cccccc;
+  color: #999999;
+  cursor: default;
+}
+.teamList {
+
+}
+.teamBtn {
+	background: #fff;
+}
+.teamBtn.selected {
+	background: limegreen;
+}
+
+table { width: 100%; }
+td { text-align: center; }
+</style>
+</head>
+<body>
+<div class="wrapper">
+	<header>
+<div class="left"><p>Scottish Cup
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 135 180" width="50" height="67"><defs><style>.a{fill:#999;}.b{fill:#fff;}</style></defs><title>trophy</title><polygon points="27 63 27 45 108 45 108 63 117 63 117 54 135 54 135 99 126 99 126 108 117 108 117 117 108 117 108 126 99 126 99 135 90 135 90 144 81 144 81 153 99 153 99 162 108 162 108 180 27 180 27 162 36 162 36 153 54 153 54 144 45 144 45 135 36 135 36 126 27 126 27 117 18 117 18 108 9 108 9 99 0 99 0 54 18 54 18 63 27 63"/><polygon points="54 45 54 36 45 36 45 0 63 0 63 9 72 9 72 18 81 18 81 27 90 27 90 36 81 36 81 46 54 45"/><polygon class="a" points="9 99 9 63 18 63 18 72 36 72 36 81 45 81 45 63 99 63 99 72 117 72 117 63 126 63 126 99 126 99 108 99 108 108 108 117 108 117 99 117 99 126 90 126 90 135 81 135 72 135 72 144 72 153 72 162 99 162 99 171 36 171 36 162 63 162 63 153 63 144 63 135 45 135 45 126 36 126 36 117 27 117 27 99 9 99"/><polygon class="a" points="63 55 63 36 54 36 54 9 63 9 63 18 72 18 72 27 81 27 81 36 72 36 72 55 63 55"/><polygon points="36 99 36 81 18 81 18 90 27 90 27 99 36 99"/><polygon points="99 99 99 81 117 81 117 90 108 90 108 99 99 99"/><polygon class="b" points="99 54 36 54 36 81 45 81 45 63 99 63 99 54"/><rect class="b" x="36" y="90" width="9" height="9"/><rect class="b" x="54" y="27" width="9" height="9"/></svg></p>
+</div>
+<div class="right"><div class="box-blue ceefax">HAMPDEN</div></div>
+	</header>
+	<main>
+
+		<div class="welcomeScreen text-center">
+		<h1>Welcome to Hampden</h1>
+		<p>Hampden is a simple dice-based football simulation based on an old board game called Wembley.</p>
+		<p>Each round you play your dice against your opponent through 90 minutes, extra time, penalties and even sudden death if required. Your dice is picked based on the venue and division of the respective teams.</p>
+		<p>Lead your chosen team to the glory of the Scottish Cup at Hampden...</p>
+			<p><button class="startBtn">Get started...</button></p>
+		</div>
+
+		<div class="teamsScreen text-center" style="display: none;">
+			<h2>Pick your team...</h2>
+			<p>This seasons Scottish Cup has <span class="totalTeams"></span> teams and will be played over <span class="totalRounds"></span> rounds.</p><p>Choose your favourite team and click to Play Hampden...</p>
+			<div class="teamList"></div>
+			<p class="selectedTeam"></p>
+			<p><button class="playBtn" disabled>Play Hampden...</button></p>
+		</div>
+
+		<div class="roundScreen text-center" style="display: none;">
+			<h2><span class="roundName"></span></h2>
+			<p><strong class="myTeam"></strong> are one of <strong class="totalTeams"></strong> teams in the hat for this <strong class="roundName"></strong> draw.</p>
+			<div class="gameContent"></div>
+			<p>
+<button class="drawBtn">Make draw...</button>
+<button class="roundBtn" style="display: none;">Play round...</button>
+<button class="nextBtn" style="display: none;">Next round...</button>
+<button class="finalBtn" style="display: none;">Play Final...</button>
+<button class="endBtn" style="display: none;">End game...</button>
+			</p>
+		</div>
+
+		<div class="finalScreen text-center" style="display: none;">
+<h2>Scottish Cup Final</h2>
+  <p><span class="myTeam"></span> have made the Final of this years' Scottish Cup</p>
+	<p><span class="finalist"></span> are set to play <span class="myTeam"></span> in what is sure to be a gripping final.</p>
+	<div class="finalContent"></div>
+			<p><button class="koBtn">Kick Off...</button></p>
+		</div>
+
+	</main>
+	<footer></footer>
+</div>
+
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
+<script>
+var teams;
+var currentRound;
+var totalTeams;
+var totalRounds;
+var roundName;
+
+var dice = [0,0,1,1,2,3];
+var penDice = [0,0,1,1,1,1];
+
+function initialiseGame() {
+	teams = [ // start teams array
+		{
+		id: 0,
+		name: "Aberdeen",
+		division: "Pr",
+		player: 0
+	},
+	{
+		id: 1,
+		name: "Celtic",
+		division: "Pr",
+		player: 0
+	},
+	{
+		id: 2,
+		name: "Hearts",
+		division: "Pr",
+		player: 0
+	},
+	{
+		id: 3,
+		name: "Rangers",
+		division: "Pr",
+		player: 0
+	},
+	{
+		id: 4,
+		name: "Inverness",
+		division: "Ch",
+		player: 0
+	},
+	{
+		id: 5,
+		name: "Dundee Utd",
+		division: "Ch",
+		player: 0
+	},
+	{
+		id: 6,
+		name: "Raith Rovers",
+		division: "D1",
+		player: 0
+	},
+	{
+		id: 7,
+		name: "Dumbarton",
+		division: "D1",
+		player: 0
+	}
+	];
+	currentRound = 1; // set current round to 1
+	totalTeams = teams.length; // set total teams
+	$('.totalTeams').html(totalTeams);
+	totalRounds = 1;
+	var i = totalTeams;
+	do {
+  	totalRounds++;
+		i = i / 2;
+	} while (i > 2);
+	$('.totalRounds').text(totalRounds);
+	listTeams(); // list teams
+	roundNamer(); // start round naming
+}
+
+function listTeams() {
+	var teamList = '<p>';
+	teams.forEach(function(team) { // loop teams
+		var team;
+		teamList += '<button class="teamBtn" " value="' + team.id + '">' + team.name + ' <small>(' + team.division + ')</small></button> '; // output button
+	});
+	teamList += '</p>';
+	$('.teamList').html(teamList);
+	pickTeam(); // pick team
+}
+
+function roundNamer() { // name current round and update game screens
+	if (totalRounds - currentRound == 0) {
+		roundName = 'Final';
+	} else if (totalRounds - currentRound == 1) {
+		roundName = 'Semi-Final';
+	} else if (totalRounds - currentRound == 2) {
+		roundName = 'Quarter-Final';
+	} else {
+		roundName = 'Round ' + currentRound;
+	}
+	$('.roundName').text(roundName);
+}
+
+function pickTeam() {
+	$('.teamBtn').click(function() { // click team function
+		$('.teamBtn').removeClass('selected');
+    $(this).addClass('selected'); // highlight selected button
+		myTeamID = $(this).val(); // set myTeamID
+    myTeam = teams[myTeamID].name; // set myTeam
+		$('.playBtn').removeAttr("disabled"); // enable play button
+		$('.selectedTeam').html('You have selected <span class="myTeam">' + myTeam + '</span>');
+// add team to all screens
+	});
+}
+
+function makeDraw() {
+	teams.sort(function() { return 0.5 - Math.random() }); // shuffle teams array (draw teams)
+	var matches = teams.length / 2; // calculate number of matches
+	var fixtures = '<table>';
+	var t = 0; // teams array key
+	for (var i = 1; i <= matches; i++) {
+		fixtures += '<tr class="match' + i + '">';
+		// home team, key and score
+		var homeKey = t;
+		var homeTeam = teams[t].name;
+		var homeScore = dice[Math.floor(Math.random() * dice.length)];
+		fixtures += '<td width="15%"></td><td class="text-right home" id="' + t + '" width="25%">' + homeTeam + '</td>';
+		fixtures += '<td class="homeScore" width="5%"></td><td class="" width="10%">vs</td><td class="awayScore" width="5%"></td>';
+		t++; // away team, key and score
+		var awayKey = t;
+		var awayTeam = teams[t].name;
+		var awayScore = dice[Math.floor(Math.random() * dice.length)];
+		fixtures += '<td class="text-left away" id="' + t + '" width="25%">' + awayTeam + '</td>';
+		fixtures += '<td class="ft" width="15%"></td>';
+		t++; // increment t for next round of matches
+		fixtures += '</tr>';
+	}
+	fixtures += '</table>';
+	$('.gameContent').html(fixtures);
+}
+
+function playRound() {
+	currentRound++;
+  var matches = totalTeams / 2;
+	var losers = [];
+	for (var i = 1; i <= matches; i++) { // loop matches
+
+		var homeScore = dice[Math.floor(Math.random() * dice.length)];
+		$('.match' + i + ' .homeScore').html(homeScore);
+		var awayScore = dice[Math.floor(Math.random() * dice.length)];
+		$('.match' + i + ' .awayScore').html(awayScore);
+
+		if (homeScore > awayScore) {
+			var loser = $('.match' + i + ' .away').attr('id');
+		} else if (homeScore < awayScore) {
+			var loser = $('.match' + i + ' .home').attr('id');
+		} else { // EXTRA TIME
+
+  		var homeScore = dice[Math.floor(Math.random() * dice.length)];
+      $('.match' + i + ' .homeScore').html(homeScore);
+      var awayScore = dice[Math.floor(Math.random() * dice.length)];
+      $('.match' + i + ' .awayScore').html(awayScore);
+      $('.match' + i + ' .ft').html('(AET)');
+
+      if (homeScore > awayScore) {
+			  var loser = $('.match' + i + ' .away').attr('id');
+		  } else if (homeScore < awayScore) {
+			  var loser = $('.match' + i + ' .home').attr('id');
+		  } else { // PENALTIES
+
+  		  for (var i = 0; i < 5; i++) {
+          var r = 5 - i;
+          homePen += penDice[Math.floor(Math.random() * penDice.length)];
+          if (awayPen + r < homePen) { break; }
+          awayPen += penDice[Math.floor(Math.random() * penDice.length)];
+          if (awayPen + r < homePen) { break; }
+        }
+        $('.match' + i + ' .ft').html( homePen + ' - ' + awayPen + ' (PENS)');
+
+        if (homePen > awayPen {
+          var loser = $('.match' + i + ' .away').attr('id');
+        } else if (homePen < awayPen) {
+          var loser = $('.match' + i + ' .home').attr('id');
+        } else { // sudden death!
+
+          do {
+            homeScore += Math.floor((Math.random() * 2));
+            if ((awayScore + 2 == homeScore) || ((awayScore - 2 == homeScore)) { break; }
+            awayScore += Math.floor((Math.random() * 2));
+            if ((awayScore + 2 == homeScore) || ((awayScore - 2 == homeScore)) { break; }
+            i++;
+          } while (i < 100);
+
+          if (homePen > awayPen {
+            var loser = $('.match' + i + ' .away').attr('id');
+          } else if (homePen < awayPen) {
+            var loser = $('.match' + i + ' .home').attr('id');
+          }
+
+          $('.match' + i + ' .ft').html( homePen + ' - ' + awayPen + ' (PENS)');
+
+        }
+
+  		}
+
+
+		}
+		losers.push(loser);
+	}
+	losers = losers.reverse();
+	for (var i = 0; i < losers.length; i++) {
+		teams.splice(losers[i],1);
+	}
+	totalTeams = teams.length; // check if team through!!
+	var through = false;
+	for (var i = 0; i < totalTeams; i++) {
+		if (teams[i].id == myTeamID) {
+			through = true; // through!!
+			break;
+		}
+	}
+	if (through == true) {
+		if (totalTeams == 2) {
+			$('.gameContent').append('<p><strong>Congratulations!</strong> ' + myTeam + ' are through to the Final...</p>');
+			$('.finalBtn').show();
+		} else {
+			$('.gameContent').append('<p><strong>Congratulations!</strong> ' + myTeam + ' are through to the next round...</p>');
+			$('.nextBtn').show();
+		}
+	} else {
+		$('.gameContent').append('<p><strong>Unlucky!</strong> ' + myTeam + ' have been eliminated. Try again...</p>');
+		$('.endBtn').show();
+	}
+}
+
+function drawFinal() {
+
+}
+
+function clearGame() {
+	$('.teamList,.selectedTeam, .gameContent').html('');
+	$('.drawBtn').show();
+	myTeamID = null;
+	myTeam = null;
+	initialiseGame();
+}
+
+$('.startBtn').click(function() {
+	$('.welcomeScreen').hide();
+	$('.teamsScreen').show();
+});
+
+$('.playBtn').click(function() {
+	$('.teamsScreen').hide();
+	$('.roundScreen').show();
+	$('.myTeam').text(myTeam);
+	teams[myTeamID].player = 1;
+});
+
+$('.drawBtn').click(function() {
+	makeDraw();
+	$(this).hide();
+	$('.roundBtn').show();
+});
+
+$('.roundBtn').click( function() {
+	$('.roundBtn').hide();
+	playRound();
+});
+
+$('.nextBtn').click( function() {
+	$(this).hide();
+		roundNamer();
+		$('.totalTeams').text(totalTeams);
+		$('.gameContent').html('');
+		$('.drawBtn').show();
+});
+
+$('.finalBtn').click( function() {
+	finalDraw();
+	$('.finalBtn,.roundScreen').hide();
+	$('.finalScreen').show();
+});
+
+$('.endBtn').click( function() {
+	$('.endBtn,.roundScreen').hide();
+	$('.welcomeScreen').show();
+	$('.playBtn').attr('disabled',true);
+	clearGame();
+});
+</script>
+</html>
