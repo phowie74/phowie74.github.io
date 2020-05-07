@@ -44,7 +44,7 @@ for (var i = 0; i < 5; i++) {
 ```
 Then I can use the same logic as the extra time check to see if sudden death is required...
 ```
-if (homePen > awayPen {
+if (homePen > awayPen) {
   // home win!
 } else if (homePen < awayPen) {
   // away win!
@@ -63,9 +63,9 @@ and then add the same logic in between penalties except looking for a 2 goal adv
 ```
 do {
   homeScore += Math.floor((Math.random() * 2));
-  if ((awayScore + 2 == homeScore) || ((awayScore - 2 == homeScore)) { break; }
+  if ((awayScore + 2 == homeScore) || (awayScore - 2 == homeScore)) { break; }
   awayScore += Math.floor((Math.random() * 2));
-  if ((awayScore + 2 == homeScore) || ((awayScore - 2 == homeScore)) { break; }
+  if ((awayScore + 2 == homeScore) || (awayScore - 2 == homeScore)) { break; }
   i++;
 } while (i < 100);
 ```

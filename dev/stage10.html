@@ -154,13 +154,24 @@ td { text-align: center; }
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
 <script>
 var teams;
-var currentRound;
 var totalTeams;
 var totalRounds;
+var currentRound;
 var roundName;
+var myTeamID;
+var myTeam;
+var matches;
+var losers = [];
 
 var dice = [0,0,1,1,2,3];
 var penDice = [0,0,1,1,1,1];
+
+$(function() {
+  initialiseGame();
+  roundNamer();
+
+  $('.myTeam').text(myTeam);
+});
 
 function initialiseGame() {
 	teams = [ // start teams array
@@ -318,6 +329,9 @@ function playRound() {
 			  var loser = $('.match' + i + ' .home').attr('id');
 		  } else { // PENALTIES
 
+  		  var homePen = 0;
+  		  var awayPen = 0;
+
   		  for (var i = 0; i < 5; i++) {
           var r = 5 - i;
           homePen += penDice[Math.floor(Math.random() * penDice.length)];
@@ -327,7 +341,7 @@ function playRound() {
         }
         $('.match' + i + ' .ft').html( homePen + ' - ' + awayPen + ' (PENS)');
 
-        if (homePen > awayPen {
+        if (homePen > awayPen) {
           var loser = $('.match' + i + ' .away').attr('id');
         } else if (homePen < awayPen) {
           var loser = $('.match' + i + ' .home').attr('id');
@@ -335,13 +349,13 @@ function playRound() {
 
           do {
             homeScore += Math.floor((Math.random() * 2));
-            if ((awayScore + 2 == homeScore) || ((awayScore - 2 == homeScore)) { break; }
+            if ((awayScore + 2 == homeScore) || (awayScore - 2 == homeScore)) { break; }
             awayScore += Math.floor((Math.random() * 2));
-            if ((awayScore + 2 == homeScore) || ((awayScore - 2 == homeScore)) { break; }
+            if ((awayScore + 2 == homeScore) || (awayScore - 2 == homeScore)) { break; }
             i++;
           } while (i < 100);
 
-          if (homePen > awayPen {
+          if (homePen > awayPen) {
             var loser = $('.match' + i + ' .away').attr('id');
           } else if (homePen < awayPen) {
             var loser = $('.match' + i + ' .home').attr('id');
