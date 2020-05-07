@@ -6,6 +6,7 @@ description: Testing github pages and jekyll blogging as I learn to use github.
 remote_theme: mmistakes/so-simple-theme@3.2.0
 skin: /assets/css/skins/dark.css
 
+show_excerpts: false
 
 author:
   links:
