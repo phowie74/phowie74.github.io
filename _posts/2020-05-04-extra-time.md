@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "Extra time"
+categories: [Hampden, jquery]
 ---
 
 # Extra time

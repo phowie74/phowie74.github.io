@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "Array issues"
+categories: [Hampden, jquery]
 ---
 
 # Array issues

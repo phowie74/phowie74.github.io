@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "Play Final"
+categories: [Hampden, html, jquery]
 ---
 
 # Play Final
